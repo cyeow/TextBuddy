@@ -228,3 +228,10 @@ $RECYCLE.BIN/
 *.msi
 *.msm
 *.msp
+TextBuddy.sln
+TextBuddy/ReadMe.txt
+TextBuddy/stdafx.cpp
+TextBuddy/stdafx.h
+TextBuddy/targetver.h
+TextBuddy/TextBuddy.vcxproj
+TextBuddy/TextBuddy.vcxproj.filters
