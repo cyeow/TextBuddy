@@ -66,8 +66,10 @@ public:
 	static void printLine(int i, string line);
 	static void showToUser(string text);
 
+	static string checkCommandType(TextBuddy::CommandType command);
 	static bool checkInvalidInput(string content);
 	static void checkCLI(int argc);
+
 	static void initStore(string filename);
 
 
@@ -82,6 +84,7 @@ private:
 	static const string MESSAGE_WELCOME;
 	static const string ERROR_UNRECOGNISED_COMMAND_TYPE;
 	static const string ERROR_USAGE;
+	static const string PROMPT_COMMAND;
 
 	static char buffer[MAX_BUFFER_CHARACTERS];
 	static vector<string> store;

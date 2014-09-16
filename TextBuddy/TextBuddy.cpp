@@ -39,6 +39,7 @@ const string TextBuddy::MESSAGE_PROGRAM_TERMINATION = "Enter any key to exit: ";
 const string TextBuddy::MESSAGE_WELCOME = "Welcome to TextBuddy. %s is ready for use";
 const string TextBuddy::ERROR_UNRECOGNISED_COMMAND_TYPE = "ERROR: Unrecognised command type.\n1. add <text>\n2. delete <line number>\n3. clear\n4. display\n5. sort\n6. search <word(s)>\n7. exit";
 const string TextBuddy::ERROR_USAGE = "ERROR: Usage: textbuddy.exe <filename>.txt";
+const string TextBuddy::PROMPT_COMMAND = "command:";
 
 char TextBuddy::buffer[MAX_BUFFER_CHARACTERS] = "";
 vector<string> TextBuddy::store;
@@ -62,7 +63,7 @@ void TextBuddy::main(int argc, char* argv[]) {
 void TextBuddy::inputCommand(string filename){
 
 	while (true) {
-		cout << "command:";
+		cout << PROMPT_COMMAND;
 
 		string userCommand;
 		getline(cin, userCommand);
@@ -172,23 +173,6 @@ string TextBuddy::clearAll(string filename) {
 	return buffer;
 }
 
-
-// initialises the vector and *.txt 
-void TextBuddy::initStore(string filename) {
-	ifstream inFile;
-	string line;
-
-	inFile.open(filename);
-
-	while (getline(inFile, line)) {
-		store.push_back(line);
-	}
-
-	inFile.close();
-
-	return;
-}
-
 // returns iterator of line number requested (0 <= line number < n)
 vector<string>::iterator TextBuddy::getLineIter(string filename, string content) {
 	int iter = 1;
@@ -208,6 +192,7 @@ vector<string>::iterator TextBuddy::getLineIter(string filename, string content)
 	return store.end();
 }
 
+// determines the command type of input given
 TextBuddy::CommandType TextBuddy::determineCommandType(string command) {
 	transform(command.begin(), command.end(), command.begin(), ::tolower);
 
@@ -230,24 +215,7 @@ TextBuddy::CommandType TextBuddy::determineCommandType(string command) {
 		return CommandType::INVALID;
 }
 
-bool TextBuddy::checkInvalidInput(string content) {
-	if (content == "" || content == " ") {
-		return true;
-	}
-	return false;
-}
-
-void TextBuddy::checkCLI(int argc) {
-	if (argc != MAX_ARGUMENTS) {
-		// if the command line input is wrong, generates an error message and terminates the program.
-		showToUser(ERROR_USAGE);
-		showToUser(MESSAGE_PROGRAM_TERMINATION);
-
-		getchar();
-		exit(0);
-	}
-}
-
+// returns the string with the first word removed
 string TextBuddy::removeFirstWord(string command){
 	if (command.find_first_of(" ") == string::npos) {
 		return "";
@@ -255,16 +223,9 @@ string TextBuddy::removeFirstWord(string command){
 	return command.substr(command.find_first_of(" ") + 1);
 }
 
+// returns the first word in a string
 string TextBuddy::getFirstWord(string command){
 	return command.substr(0, command.find(' '));
-}
-
-void TextBuddy::printLine(int i, string line) {
-	cout << i << ". " << line << endl;
-}
-
-void TextBuddy::showToUser(string text) {
-	cout << text << endl;
 }
 
 // transfers strings in vector to file
@@ -281,6 +242,74 @@ void TextBuddy::writeToFile(string filename) {
 			file.close();
 		}
 	}
+
+	return;
+}
+
+// outputs string with line number
+void TextBuddy::printLine(int i, string line) {
+	cout << i << ". " << line << endl;
+}
+
+// outputs message in buffer[] to user
+void TextBuddy::showToUser(string text) {
+	cout << text << endl;
+}
+
+// checks if commandtype output from determineCommandType() is correct. for testing only.
+string TextBuddy::checkCommandType(TextBuddy::CommandType command) {
+
+	switch (command){
+		case ADD_LINE:
+			return "add";
+		case DISPLAY_ALL:
+			return "display";
+		case DELETE_LINE:
+			return "delete";
+		case CLEAR_ALL:
+			return "clear";
+		case EXIT:
+			return "exit";
+		case INVALID:
+			return "invalid";
+		default:
+			return "error";
+	}
+
+}
+
+// checks if input is invalid
+bool TextBuddy::checkInvalidInput(string content) {
+	if (content == "" || content == " ") {
+		return true;
+	}
+	return false;
+}
+
+// checks if command line input is correct
+void TextBuddy::checkCLI(int argc) {
+	if (argc != MAX_ARGUMENTS) {
+		// if the command line input is wrong, generates an error message and terminates the program.
+		showToUser(ERROR_USAGE);
+		showToUser(MESSAGE_PROGRAM_TERMINATION);
+
+		getchar();
+		exit(0);
+	}
+}
+
+// initialises the vector and *.txt 
+void TextBuddy::initStore(string filename) {
+	ifstream inFile;
+	string line;
+
+	inFile.open(filename);
+
+	while (getline(inFile, line)) {
+		store.push_back(line);
+	}
+
+	inFile.close();
 
 	return;
 }
