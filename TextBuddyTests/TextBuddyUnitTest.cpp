@@ -104,5 +104,31 @@ namespace TextBuddyTests
 			TextBuddy::writeToFile(filename);
 		}
 
+		TEST_METHOD(sortAlphaTest) {
+
+			const string ExpOutput = "all content in heytemp123.txt sorted alphabetically";
+
+			Assert::AreEqual(ExpOutput, TextBuddy::sortAlphabetical(filename));
+
+		}
+
+		TEST_METHOD(searchFileTest) {
+			const string ExpOutput1 = "found 2 result(s) in heytemp123.txt";
+			const string ExpOutput2 = "found 1 result(s) in heytemp123.txt";
+			const string ExpOutput3 = "found 0 result(s) in heytemp123.txt";
+
+			//set up file
+			TextBuddy::addLine(filename, testLongString);
+			TextBuddy::addLine(filename, testShortString);
+			TextBuddy::writeToFile(filename);
+
+			Assert::AreEqual(ExpOutput1, TextBuddy::searchFile(filename, "sample"));
+			Assert::AreEqual(ExpOutput2, TextBuddy::searchFile(filename, "text"));
+			Assert::AreEqual(ExpOutput3, TextBuddy::searchFile(filename, "hello"));
+
+			//clear file
+			TextBuddy::clearAll(filename);
+			TextBuddy::writeToFile(filename);
+		}
 	};
 }
