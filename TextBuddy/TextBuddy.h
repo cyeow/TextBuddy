@@ -42,7 +42,7 @@ class TextBuddy {
 
 public:
 	enum CommandType {
-		ADD_LINE, DISPLAY_ALL, DELETE_LINE, CLEAR_ALL, EXIT, INVALID
+		ADD_LINE, DISPLAY_ALL, DELETE_LINE, CLEAR_ALL, SORT, SEARCH, EXIT, INVALID
 	};
 
 	static void main(int argc, char* argv[]);

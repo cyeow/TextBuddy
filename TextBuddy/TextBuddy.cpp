@@ -268,6 +268,10 @@ string TextBuddy::checkCommandType(TextBuddy::CommandType command) {
 			return "delete";
 		case CLEAR_ALL:
 			return "clear";
+		case SORT:
+			return "sort";
+		case SEARCH:
+			return "search";
 		case EXIT:
 			return "exit";
 		case INVALID:
