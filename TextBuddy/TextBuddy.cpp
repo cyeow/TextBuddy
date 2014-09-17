@@ -33,6 +33,8 @@ const string TextBuddy::MESSAGE_EMPTY = "%s is empty";
 const string TextBuddy::MESSAGE_ADDED = "added to %s: \"%s\"";
 const string TextBuddy::MESSAGE_DELETED = "deleted from %s: \"%s\"";
 const string TextBuddy::MESSAGE_CLEARED = "all content deleted from %s";
+const string TextBuddy::MESSAGE_SORTED = "all content in %s sorted alphabetically";
+const string TextBuddy::MESSAGE_SEARCH_FOUND = "found %d result(s) in %s";
 const string TextBuddy::MESSAGE_LINE_NOT_FOUND = "line not found in %s";
 const string TextBuddy::MESSAGE_INVALID_FORMAT = "invalid command format: %s\n1. add <text>\n2. delete <line number>\n3. clear\n4. display\n5. sort\n6. search <word(s)>\n7. exit\n";
 const string TextBuddy::MESSAGE_PROGRAM_TERMINATION = "Enter any key to exit: ";
@@ -169,6 +171,30 @@ string TextBuddy::clearAll(string filename) {
 	store.clear();
 
 	sprintf_s(buffer, MESSAGE_CLEARED.c_str(), filename.c_str());
+
+	return buffer;
+}
+
+// sorts the lines in alphabetical order
+string TextBuddy::sortAlphabetical(string filename) {
+	stable_sort(store.begin(), store.end());
+
+	sprintf_s(buffer, MESSAGE_SORTED.c_str(), filename.c_str());
+
+	return buffer;
+}
+
+
+// returns lines that contain the search word
+string TextBuddy::searchFile(string filename, string content) {
+	int resultNo = 0;
+
+	for (int i = 1; i <= (int)store.size(); i++) {
+		//search contents
+		
+	}
+
+	sprintf_s(buffer, MESSAGE_SEARCH_FOUND.c_str(), resultNo, filename.c_str());
 
 	return buffer;
 }

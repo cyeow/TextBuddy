@@ -54,6 +54,8 @@ public:
 	static string displayAll(string filename);
 	static string deleteLine(string filename, string content);
 	static string clearAll(string filename);
+	static string sortAlphabetical(string filename);
+	static string searchFile(string filename, string content);
 
 	static vector<string>::iterator getLineIter(string filename, string content);
 
@@ -78,6 +80,8 @@ private:
 	static const string MESSAGE_ADDED;
 	static const string MESSAGE_DELETED;
 	static const string MESSAGE_CLEARED;
+	static const string MESSAGE_SORTED;
+	static const string MESSAGE_SEARCH_FOUND;
 	static const string MESSAGE_LINE_NOT_FOUND;
 	static const string MESSAGE_INVALID_FORMAT;
 	static const string MESSAGE_PROGRAM_TERMINATION;
