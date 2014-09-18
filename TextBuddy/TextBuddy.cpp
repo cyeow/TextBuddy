@@ -189,9 +189,16 @@ string TextBuddy::sortAlphabetical(string filename) {
 string TextBuddy::searchFile(string filename, string content) {
 	int resultNo = 0;
 
-	for (int i = 1; i <= (int)store.size(); i++) {
-		//search contents
-		
+	for (int lineNo = 1; lineNo <= (int)store.size(); lineNo++) {
+		string::iterator lineChecker;
+
+		vector<string>::iterator i = getLineIter(filename, to_string(lineNo));
+		lineChecker = search(i->begin(), i->end(), content.begin(), content.end());
+
+		if (*lineChecker != '\0') {
+			resultNo++;
+			printLine(resultNo, *i);
+		}
 	}
 
 	sprintf_s(buffer, MESSAGE_SEARCH_FOUND.c_str(), resultNo, filename.c_str());
