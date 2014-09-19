@@ -7,44 +7,17 @@
 // The command format is given by the example interaction below:
 //
 // Welcome to TextBuddy. <filename>.txt is ready for use
-// command: add Lorem ipsum dolor sit amet
-// added to <filename>.txt: "Lorem ipsum dolor sit amet"
-// command: add consectetuer adipiscing elit
-// added to <filename>.txt: "consectetuer adipiscing elit"
+// command: add a quick brown fox
+// added to <filename>.txt: "a quick brown fox"
+// command: add jumped over a lazy dog
+// added to <filename>.txt: "jumped over a lazy dog"
 // command: display
-// 1. Lorem ipsum dolor sit amet
-// 2. consectetuer adipiscing elit
+// 1. a quick brown fox
+// 2. jumped over a lazy dog
 // command: delete 1
-// deleted from <textfile>.txt: "Lorem ipsum dolor sit amet"
+// deleted from <textfile>.txt: "a quick brown fox"
 // command: display
-// 1. consectetuer adipiscing elit
-// command: add dolor
-// added to <filename>.txt: "dolor"
-// command: add eget dolor
-// added to <filename>.txt: "eget dolor"
-// command: add Aenean commodo ligula eget dolor
-// added to <filename>.txt: "Aenean commodo ligula eget dolor"
-// command: display
-// 1. consectetuer adipiscing elit
-// 2. dolor
-// 3. eget dolor
-// 4. Aenean commodo ligula eget dolor
-// command: search dolor
-// 1. dolor
-// 2. eget dolor
-// 3. Aenean commodo ligula eget dolor
-// found 3 result(s) in <filename>.txt
-// command: sort
-// all content in <filename>.txt sorted alphabetically
-// command: display
-// 1. Aenean commodo ligula eget dolor
-// 2. consectetuer adipiscing elit
-// 3. dolor
-// 4. eget dolor
-// command: search eget
-// 1. Aenean commodo ligula eget dolor
-// 2. eget dolor
-// found 2 result(s) in <filename>.txt
+// 1. jumped over a lazy dog
 // command: clear
 // all content deleted from <textfile>.txt
 // command: exit
@@ -68,7 +41,7 @@ const string TextBuddy::MESSAGE_PROGRAM_TERMINATION = "Enter any key to exit: ";
 const string TextBuddy::MESSAGE_WELCOME = "Welcome to TextBuddy. %s is ready for use";
 const string TextBuddy::ERROR_UNRECOGNISED_COMMAND_TYPE = "ERROR: Unrecognised command type.\n1. add <text>\n2. delete <line number>\n3. clear\n4. display\n5. sort\n6. search <word(s)>\n7. exit";
 const string TextBuddy::ERROR_USAGE = "ERROR: Usage: textbuddy.exe <filename>.txt";
-const string TextBuddy::PROMPT_COMMAND = "command: ";
+const string TextBuddy::PROMPT_COMMAND = "command:";
 
 char TextBuddy::buffer[MAX_BUFFER_CHARACTERS] = "";
 vector<string> TextBuddy::store;
@@ -210,6 +183,7 @@ string TextBuddy::sortAlphabetical(string filename) {
 
 	return buffer;
 }
+
 
 // returns lines that contain the search word
 string TextBuddy::searchFile(string filename, string content) {
