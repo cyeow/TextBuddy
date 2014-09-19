@@ -1,25 +1,54 @@
 #pragma once
-// CE1TextBuddy.cpp:
+
+// TextBuddy.h:
 // TextBuddy is used to store, retrieve and delete lines in a textfile. 
 // The command format is given by the example interaction below:
 //
 // Welcome to TextBuddy. <filename>.txt is ready for use
-// command: add a quick brown fox
-// added to <filename>.txt: "a quick brown fox"
-// command: add jumped over a lazy dog
-// added to <filename>.txt: "jumped over a lazy dog"
+// command: add Lorem ipsum dolor sit amet
+// added to <filename>.txt: "Lorem ipsum dolor sit amet"
+// command: add consectetuer adipiscing elit
+// added to <filename>.txt: "consectetuer adipiscing elit"
 // command: display
-// 1. a quick brown fox
-// 2. jumped over a lazy dog
+// 1. Lorem ipsum dolor sit amet
+// 2. consectetuer adipiscing elit
 // command: delete 1
-// deleted from <textfile>.txt: "a quick brown fox"
+// deleted from <textfile>.txt: "Lorem ipsum dolor sit amet"
 // command: display
-// 1. jumped over a lazy dog
+// 1. consectetuer adipiscing elit
+// command: add dolor
+// added to <filename>.txt: "dolor"
+// command: add eget dolor
+// added to <filename>.txt: "eget dolor"
+// command: add Aenean commodo ligula eget dolor
+// added to <filename>.txt: "Aenean commodo ligula eget dolor"
+// command: display
+// 1. consectetuer adipiscing elit
+// 2. dolor
+// 3. eget dolor
+// 4. Aenean commodo ligula eget dolor
+// command: search dolor
+// 1. dolor
+// 2. eget dolor
+// 3. Aenean commodo ligula eget dolor
+// found 3 result(s) in <filename>.txt
+// command: sort
+// all content in <filename>.txt sorted alphabetically
+// command: display
+// 1. Aenean commodo ligula eget dolor
+// 2. consectetuer adipiscing elit
+// 3. dolor
+// 4. eget dolor
+// command: search eget
+// 1. Aenean commodo ligula eget dolor
+// 2. eget dolor
+// found 2 result(s) in <filename>.txt
 // command: clear
 // all content deleted from <textfile>.txt
 // command: exit
 // 
 // author: Yeow Li Teng Cheryl 
+
 
 #ifndef TEXTBUDDY_H
 #define TEXTBUDDY_H
