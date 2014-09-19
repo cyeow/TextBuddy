@@ -74,8 +74,6 @@ public:
 		ADD_LINE, DISPLAY_ALL, DELETE_LINE, CLEAR_ALL, SORT, SEARCH, EXIT, INVALID
 	};
 
-	static vector<string> store;
-
 	static void main(int argc, char* argv[]);
 
 	static void inputCommand(string filename);
@@ -122,7 +120,7 @@ private:
 	static const string PROMPT_COMMAND;
 
 	static char buffer[MAX_BUFFER_CHARACTERS];
-
+	static vector<string> store;
 
 };
 

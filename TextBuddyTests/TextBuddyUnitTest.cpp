@@ -51,16 +51,6 @@ namespace TextBuddyTests
 
 		}
 
-		TEST_METHOD(getLineIterTest) {
-			//set up file
-			TextBuddy::addLine(filename, testLongString);
-			TextBuddy::addLine(filename, testShortString);
-			TextBuddy::writeToFile(filename);
-
-			Assert::AreEqual(TextBuddy::store.begin(), TextBuddy::getLineIter(filename, "1"));
-				
-		}
-
 		TEST_METHOD(clearAllTest) {
 			const string ExpOutput = "all content deleted from heytemp123.txt";
 
