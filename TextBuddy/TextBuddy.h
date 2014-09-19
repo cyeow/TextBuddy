@@ -57,6 +57,7 @@ public:
 	static string sortAlphabetical(string filename);
 	static string searchFile(string filename, string content);
 
+	static string searchLine(string filename, string content, string lineNo);
 	static vector<string>::iterator getLineIter(string filename, string content);
 
 	static CommandType determineCommandType(string command);

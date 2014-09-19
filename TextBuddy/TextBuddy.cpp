@@ -189,21 +189,33 @@ string TextBuddy::sortAlphabetical(string filename) {
 string TextBuddy::searchFile(string filename, string content) {
 	int resultNo = 0;
 
-	for (int lineNo = 1; lineNo <= (int)store.size(); lineNo++) {
-		string::iterator lineChecker;
-
-		vector<string>::iterator i = getLineIter(filename, to_string(lineNo));
-		lineChecker = search(i->begin(), i->end(), content.begin(), content.end());
-
-		if (*lineChecker != '\0') {
+	for (int i = 1; i <= (int)store.size(); i++) {
+		string result;
+		result = searchLine(filename, content, to_string(i));
+		if (result != "") {
 			resultNo++;
-			printLine(resultNo, *i);
+			printLine(resultNo, result);
 		}
 	}
 
 	sprintf_s(buffer, MESSAGE_SEARCH_FOUND.c_str(), resultNo, filename.c_str());
 
 	return buffer;
+}
+
+// returns content of line number IF search word is found in the line
+string TextBuddy::searchLine(string filename, string content, string lineNo) {
+	string::iterator lineChecker;
+
+	vector<string>::iterator i = getLineIter(filename, lineNo);
+	lineChecker = search(i->begin(), i->end(), content.begin(), content.end());
+
+	if (i->begin() == i->end() || lineChecker == i->end()) {
+		return "";
+	}
+	else {
+		return *i;
+	}
 }
 
 // returns iterator of line number requested (0 <= line number < n)
