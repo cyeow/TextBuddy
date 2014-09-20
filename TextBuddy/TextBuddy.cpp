@@ -106,6 +106,7 @@ void TextBuddy::inputCommand(string filename){
 }
 
 // parses the command and passes it to the appropriate operation
+// returns string that said operations returns
 string TextBuddy::executeCommand(string filename, string userCommand) {
 	CommandType command;
 	string content;
@@ -152,7 +153,8 @@ string TextBuddy::executeCommand(string filename, string userCommand) {
 
 }
 
-// adds a line to the text file
+// adds a line to the end of the text file being used in the current run.
+// returns a message indicating addition success
 string TextBuddy::addLine(string filename, string content) {
 
 	store.push_back(content);
@@ -162,7 +164,8 @@ string TextBuddy::addLine(string filename, string content) {
 	return buffer;
 }
 
-// displays all content in the text file
+// displays all content in the text file in this format:
+// lineNumber. <line content>
 string TextBuddy::displayAll(string filename) {
 
 	int lineCount = 1; 
@@ -180,7 +183,8 @@ string TextBuddy::displayAll(string filename) {
 	return "";
 }
 
-// deletes a line (stated) in the text file
+// deletes a specified line (input parameter: content) in the text file
+// returns a string indicating successful deletion
 string TextBuddy::deleteLine(string filename, string content) {
 
 	vector<string>::iterator i = getLineIter(filename, content);
@@ -193,6 +197,7 @@ string TextBuddy::deleteLine(string filename, string content) {
 }
 
 // deletes all content in the text file
+// returns a string indicating successful deletion
 string TextBuddy::clearAll(string filename) {
 
 	store.clear();
@@ -203,6 +208,7 @@ string TextBuddy::clearAll(string filename) {
 }
 
 // sorts the lines in alphabetical order
+// returns a string indicating successful sorting
 string TextBuddy::sortAlphabetical(string filename) {
 	stable_sort(store.begin(), store.end());
 
@@ -211,7 +217,9 @@ string TextBuddy::sortAlphabetical(string filename) {
 	return buffer;
 }
 
-// returns lines that contain the search word
+// searches the textfile for search word/phrase
+// displays lines that contain the search word/phrase <lineNo. (line content)>
+// returns a string indicating number of results search function found.
 string TextBuddy::searchFile(string filename, string content) {
 	int resultNo = 0;
 
@@ -244,16 +252,16 @@ string TextBuddy::searchLine(string filename, string content, string lineNo) {
 	}
 }
 
-// returns iterator of line number requested (0 <= line number < n)
+// returns iterator of line number requested (1 <= line number <= n)
 vector<string>::iterator TextBuddy::getLineIter(string filename, string content) {
-	int iter = 1;
+	int i = 1;
 
-	for (vector<string>::iterator i = store.begin(); i != store.end(); i++) {
-		if (iter == stoi(content)) {
-			return i;
+	for (vector<string>::iterator iter = store.begin(); iter != store.end(); iter++) {
+		if (i == stoi(content)) {
+			return iter;
 		}
 		else
-			iter++;
+			i++;
 	}
 
 	sprintf_s(buffer, MESSAGE_LINE_NOT_FOUND.c_str(), filename.c_str());
@@ -264,6 +272,7 @@ vector<string>::iterator TextBuddy::getLineIter(string filename, string content)
 }
 
 // determines the command type of input given
+// returns equivalent command in enum CommandType format
 TextBuddy::CommandType TextBuddy::determineCommandType(string command) {
 	transform(command.begin(), command.end(), command.begin(), ::tolower);
 
@@ -299,7 +308,7 @@ string TextBuddy::getFirstWord(string command){
 	return command.substr(0, command.find(' '));
 }
 
-// transfers strings in vector to file
+// transfers strings in vector to file (1 string in vector = 1 line in file)
 void TextBuddy::writeToFile(string filename) {
 	ofstream file;
 
@@ -317,7 +326,8 @@ void TextBuddy::writeToFile(string filename) {
 	return;
 }
 
-// outputs string with line number
+// outputs string with line number 
+// i. <line>
 void TextBuddy::printLine(int i, string line) {
 	cout << i << ". " << line << endl;
 }
@@ -353,7 +363,7 @@ string TextBuddy::checkCommandType(TextBuddy::CommandType command) {
 
 }
 
-// checks if input is invalid
+// checks if user input is invalid
 bool TextBuddy::checkInvalidInput(string content) {
 	if (content == "" || content == " ") {
 		return true;
@@ -362,9 +372,9 @@ bool TextBuddy::checkInvalidInput(string content) {
 }
 
 // checks if command line input is correct
+// if incorrect, this function generates an error message and terminates the programme. 
 void TextBuddy::checkCLI(int argc) {
 	if (argc != MAX_ARGUMENTS) {
-		// if the command line input is wrong, generates an error message and terminates the program.
 		showToUser(ERROR_USAGE);
 		showToUser(MESSAGE_PROGRAM_TERMINATION);
 
@@ -374,6 +384,8 @@ void TextBuddy::checkCLI(int argc) {
 }
 
 // initialises the vector and *.txt 
+// by loading contents of *.txt (if it exists) into vector
+// or creating new *.txt 
 void TextBuddy::initStore(string filename) {
 	ifstream inFile;
 	string line;

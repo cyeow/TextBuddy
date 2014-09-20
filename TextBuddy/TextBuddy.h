@@ -53,25 +53,31 @@
 #ifndef TEXTBUDDY_H
 #define TEXTBUDDY_H
 
-#include "stdafx.h"
 #include <iostream>
 #include <string>
 #include <fstream>
 #include <algorithm>
 #include <vector>
+#include "stdafx.h"
 
 using namespace std;
 
 const int MAX_ARGUMENTS = 2;
 const int MAX_BUFFER_CHARACTERS = 255;
 const int TEXTFILE_NAME = 1;
-const int FILE_IS_EMPTY = 1;
 
 class TextBuddy {
 
 public:
 	enum CommandType {
-		ADD_LINE, DISPLAY_ALL, DELETE_LINE, CLEAR_ALL, SORT, SEARCH, EXIT, INVALID
+		ADD_LINE, 
+		DISPLAY_ALL, 
+		DELETE_LINE, 
+		CLEAR_ALL, 
+		SORT, 
+		SEARCH, 
+		EXIT, 
+		INVALID
 	};
 
 	static void main(int argc, char* argv[]);

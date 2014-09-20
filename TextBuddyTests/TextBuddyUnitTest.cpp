@@ -39,15 +39,52 @@ namespace TextBuddyTests
 			const string display = "display";
 			const string invalid = "invalid";
 
-			Assert::AreNotEqual(add, TextBuddy::checkCommandType(TextBuddy::determineCommandType(testLongString)));
-			Assert::AreEqual(add, TextBuddy::checkCommandType(TextBuddy::determineCommandType("Add")));
-			Assert::AreEqual(add, TextBuddy::checkCommandType(TextBuddy::determineCommandType("add")));
-			Assert::AreEqual(clear, TextBuddy::checkCommandType(TextBuddy::determineCommandType("clear")));
-			Assert::AreEqual(deleteLine, TextBuddy::checkCommandType(TextBuddy::determineCommandType("delete")));
-			Assert::AreEqual(display, TextBuddy::checkCommandType(TextBuddy::determineCommandType("display")));
-			Assert::AreEqual(invalid, TextBuddy::checkCommandType(TextBuddy::determineCommandType(testLongString)));
-			Assert::AreEqual(invalid, TextBuddy::checkCommandType(TextBuddy::determineCommandType(testShortString)));
-			Assert::AreNotEqual(add, TextBuddy::checkCommandType(TextBuddy::determineCommandType(testLooksEmptyString)));
+			Assert::AreEqual(
+				add, 
+				TextBuddy::checkCommandType(
+					TextBuddy::determineCommandType("Add"))
+			);
+			Assert::AreEqual(
+				add, 
+				TextBuddy::checkCommandType(
+					TextBuddy::determineCommandType("add"))
+			);
+			Assert::AreEqual(
+				clear, 
+				TextBuddy::checkCommandType(
+					TextBuddy::determineCommandType("clear"))
+			);
+			Assert::AreEqual(
+				deleteLine, 
+				TextBuddy::checkCommandType(
+					TextBuddy::determineCommandType("delete"))
+			);
+			Assert::AreEqual(
+				display, 
+				TextBuddy::checkCommandType(
+					TextBuddy::determineCommandType("display"))
+			);
+			Assert::AreEqual(
+				invalid, 
+				TextBuddy::checkCommandType(
+					TextBuddy::determineCommandType(testLongString))
+			);
+			Assert::AreEqual(
+				invalid,
+				TextBuddy::checkCommandType(
+					TextBuddy::determineCommandType(testShortString))
+			);
+			Assert::AreNotEqual(
+				add, 
+				TextBuddy::checkCommandType(
+					TextBuddy::determineCommandType(testLooksEmptyString))
+			);
+			Assert::AreNotEqual(
+				add,
+				TextBuddy::checkCommandType(
+					TextBuddy::determineCommandType(testLongString))
+			);
+
 
 		}
 
@@ -123,6 +160,7 @@ namespace TextBuddyTests
 			TextBuddy::writeToFile(filename);
 
 			Assert::AreEqual(ExpOutput1, TextBuddy::searchFile(filename, "sample"));
+			Assert::AreEqual(ExpOutput2, TextBuddy::searchFile(filename, "sample text"));
 			Assert::AreEqual(ExpOutput2, TextBuddy::searchFile(filename, "text"));
 			Assert::AreEqual(ExpOutput3, TextBuddy::searchFile(filename, "hello"));
 
